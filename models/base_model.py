@@ -12,24 +12,31 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
 
+        dateString = "%Y-%m-%dT%H:%M:%S.%f"
+
+        # id = uuid string created when instance is created
+        self.id = str(uuid.uuid4())
+        # created_at: datetime when created
+        self.created_at = datetime.now()
+        # updated_at: updates every time changed
+        self.updated_at = datetime.now()
+
         if len(kwargs) > 0:
-            print(self.__dict__)
             for key in kwargs:
                 if key is not "__class__":
-                    if key == "updated_at":
-                        setattr(self, "updated_at", kwargs[key])
-                        self.updated_at = datetime.fromisoformat('2011-11-04')
-                    #if key == "created_at":
-                        #setattr(self, "created_at", kwargs[key])
-                        #self.created_at = datetime.fromisoformat(self.created_at)
                     setattr(self, key, kwargs[key])
-        else:
-            # id = uuid string created when instance is created
-            self.id = str(uuid.uuid4())
-            # created_at: datetime when created
-            self.created_at = datetime.now()
-            # updated_at: updates every time changed
-            self.updated_at = datetime.now()
+                    if key == "updated_at":
+                        setattr(
+                            self,
+                            "updated_at",
+                            datetime.strptime(kwargs[key],
+                                              dateString))
+                    if key == "created_at":
+                        setattr(
+                            self,
+                            "created_at",
+                            datetime.strptime(kwargs[key],
+                                              dateString))
 
     def __str__(self):
         """This sets the string format"""
