@@ -3,7 +3,7 @@
 import json
 import csv
 import uuid
-import datetime
+from datetime import datetime
 
 
 class BaseModel:
@@ -12,25 +12,24 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
 
-
-        if len(kwargs) > 0:        
-            for key, value in kwargs.items():
+        if len(kwargs) > 0:
+            print(self.__dict__)
+            for key in kwargs:
                 if key is not "__class__":
                     if key == "updated_at":
-                        setattr(self, key, updated_at.fromisoformat())
-                    if key == "created_at":
-                        setattr(self, key, created_at.fromisoformat())
-                                
-                     
-                    setattr(self, key, value)
+                        setattr(self, "updated_at", kwargs[key])
+                        self.updated_at = datetime.fromisoformat('2011-11-04')
+                    #if key == "created_at":
+                        #setattr(self, "created_at", kwargs[key])
+                        #self.created_at = datetime.fromisoformat(self.created_at)
+                    setattr(self, key, kwargs[key])
         else:
             # id = uuid string created when instance is created
             self.id = str(uuid.uuid4())
             # created_at: datetime when created
-            self.created_at = datetime.datetime.today()
+            self.created_at = datetime.now()
             # updated_at: updates every time changed
-            self.updated_at = datetime.datetime.today()
-            
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """This sets the string format"""
@@ -41,7 +40,7 @@ class BaseModel:
     def save(self):
         """ Updates the public instance attribute updated_at with the current
         datetime """
-        self.updated_at = datetime.datetime.today()
+        self.updated_at = datetime.now()
 
     # Public Method
     def to_dict(self):
