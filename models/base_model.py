@@ -3,6 +3,7 @@
 import json
 import csv
 import uuid
+import storage
 from datetime import datetime
 
 
@@ -48,6 +49,7 @@ class BaseModel:
         """ Updates the public instance attribute updated_at with the current
         datetime """
         self.updated_at = datetime.now()
+        storage.save()
 
     # Public Method
     def to_dict(self):
