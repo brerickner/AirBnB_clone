@@ -23,7 +23,7 @@ class BaseModel:
 
         if len(kwargs) > 0:
             for key in kwargs:
-                if key is not "__class__":
+                if key != "__class__":
                     setattr(self, key, kwargs[key])
                     if key == "updated_at":
                         setattr(
@@ -38,7 +38,7 @@ class BaseModel:
                             datetime.strptime(kwargs[key],
                                               dateString))
         elif len(kwargs) == 0:
-            models.storage.new(self)
+           models.storage.new(self)
 
     def __str__(self):
         """This sets the string format"""

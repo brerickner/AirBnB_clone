@@ -40,8 +40,7 @@ class FileStorage:
         """ deserializes the JSON file to __objects """
         if path.isfile(self.__file_path):
             with open(FileStorage.__file_path, mode='r') as f:
-                str = f.read(f)
-                fromFile = json.load(str)
+                fromFile = json.load(f)
                 for k, v in fromFile.items():
                     newStuff = fromFile[k]["__class__"]
                     newClass = self.classies[newStuff]
