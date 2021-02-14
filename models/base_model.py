@@ -1,11 +1,9 @@
 #!/usr/bin/python3
 """This module creates a base class"""
 import json
-import csv
 import uuid
-import storage
 from datetime import datetime
-
+import models
 
 class BaseModel:
 
@@ -21,10 +19,11 @@ class BaseModel:
         self.created_at = datetime.now()
         # updated_at: updates every time changed
         self.updated_at = datetime.now()
+        
 
         if len(kwargs) > 0:
             for key in kwargs:
-                if key is not "__class__":
+                if key != "__class__":
                     setattr(self, key, kwargs[key])
                     if key == "updated_at":
                         setattr(
@@ -38,6 +37,8 @@ class BaseModel:
                             "created_at",
                             datetime.strptime(kwargs[key],
                                               dateString))
+        elif len(kwargs) == 0:
+           models.storage.new(self)
 
     def __str__(self):
         """This sets the string format"""
@@ -49,7 +50,7 @@ class BaseModel:
         """ Updates the public instance attribute updated_at with the current
         datetime """
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     # Public Method
     def to_dict(self):
