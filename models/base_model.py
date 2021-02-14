@@ -22,21 +22,22 @@ class BaseModel:
         self.updated_at = datetime.now()
 
         if len(kwargs) > 0:
-            for key in kwargs:
-                if key != "__class__":
-                    setattr(self, key, kwargs[key])
-                    if key == "updated_at":
-                        setattr(
-                            self,
-                            "updated_at",
-                            datetime.strptime(kwargs[key],
-                                              dateString))
-                    if key == "created_at":
-                        setattr(
-                            self,
-                            "created_at",
-                            datetime.strptime(kwargs[key],
-                                              dateString))
+            for key, value in kwargs.items():
+                if value is not None:
+                    if key != "__class__":
+                        setattr(self, key, kwargs[key])
+                        if key == "updated_at":
+                            setattr(
+                                self,
+                                "updated_at",
+                                datetime.strptime(kwargs[key],
+                                                dateString))
+                        if key == "created_at":
+                            setattr(
+                                self,
+                                "created_at",
+                                datetime.strptime(kwargs[key],
+                                                dateString))
         elif len(kwargs) == 0:
             models.storage.new(self)
 

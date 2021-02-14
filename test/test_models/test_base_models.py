@@ -17,17 +17,14 @@ class TestBaseClass(unittest.TestCase):
         self.meow4 = BaseModel(name=None, id=None, number=None)
         self.meow5 = BaseModel()
         
-
-    """
-    **************UNLOCK AND SOLVE FOR FREE CHECKS********************
+    #**************UNLOCK AND SOLVE FOR FREE CHECKS********************
     def test_with_none(self):
-        *Method to test when **kwargs value is None*
+        """ Method to test when **kwargs value is None """
         self.assertIsInstance(self.meow4.id, str)
         self.assertIsInstance(self.meow4.created_at, datetime)
         self.assertIsInstance(self.meow4.updated_at, datetime)
         self.assertNotEqual(self.meow3.id, self.meow4.id)
         self.assertNotEqual(self.meow1.id, self.meow4.id)
-        """
 
     def test_baseModel_init(self):
         """ Method to test unique id generated for base_model """
@@ -105,15 +102,27 @@ class TestBaseClass(unittest.TestCase):
         self.assertIs(type(meow4_json), dict)
         self.assertIs(type(meow5_json), dict)
 
+    def test_json_key_type(self):
+        """ Method to test if json keys are all strings """
+        
+        meow1_json = self.meow1.to_dict()
+        meow2_json = self.meow2.to_dict()
+        meow3_json = self.meow3.to_dict()
+        meow4_json = self.meow4.to_dict()
+        meow5_json = self.meow5.to_dict()
 
+        for key in meow1_json.keys():
+            self.assertEquals(type(meow1_json[key]), str)
+            self.assertEquals(type(meow2_json[key]), str)
+            self.assertEquals(type(meow3_json[key]), str)
+            self.assertEquals(type(meow4_json[key]), str)
+            self.assertEquals(type(meow5_json[key]), str)
    
 
 
 
 
 """
->>> type(my_mod.id)
-<class 'str'>
 
 >>> my_mod.meow = "cat"
 >>> print(my_mod.meow)
