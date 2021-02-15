@@ -39,6 +39,32 @@ class TestBaseClass(unittest.TestCase):
         with self.assertRaises(AttributeError):
             self.meow4 = BaseModel().__objects
 
+    def test_BaseModel_dir(self):
+        """ Method to test if attrs in Basemodel """
+        self.assertTrue('to_dict' in dir(self.meow1))
+        self.assertTrue('created_at' in dir(self.meow1))
+        self.assertTrue('updated_at' in dir(self.meow1))
+        self.assertTrue('id' in dir(self.meow1))
+        self.assertTrue('save' in dir(self.meow1))
+        
+        self.assertTrue('to_dict' in dir(self.meow2))
+        self.assertTrue('created_at' in dir(self.meow2))
+        self.assertTrue('updated_at' in dir(self.meow2))
+        self.assertTrue('id' in dir(self.meow2))
+        self.assertTrue('save' in dir(self.meow2))
+        
+        self.assertTrue('to_dict' in dir(self.meow3))
+        self.assertTrue('created_at' in dir(self.meow3))
+        self.assertTrue('updated_at' in dir(self.meow3))
+        self.assertTrue('id' in dir(self.meow3))
+        self.assertTrue('save' in dir(self.meow3))
+
+        self.assertTrue('to_dict' in dir(self.meow4))
+        self.assertTrue('created_at' in dir(self.meow4))
+        self.assertTrue('updated_at' in dir(self.meow4))
+        self.assertTrue('id' in dir(self.meow4))
+        self.assertTrue('save' in dir(self.meow4))
+
     def test_with_none(self):
         """ Method to test when **kwargs value is None """
         self.assertIsInstance(self.meow4.id, str)
@@ -59,6 +85,8 @@ class TestBaseClass(unittest.TestCase):
         self.assertIsInstance(self.meow1.id, str)
         self.assertIsInstance(self.meow2.id, str)
         self.assertIsInstance(self.meow3.id, str)
+        self.assertIsInstance(self.meow4.id, str)
+        self.assertIsInstance(self.meow5.id, str)
 
     def test_id_unique(self):
         """ Method to test if id's are all unique from each other """
@@ -83,7 +111,7 @@ class TestBaseClass(unittest.TestCase):
 
         self.assertEqual(self.meow5.name, "Slim-Shady")
         self.assertEqual(self.meow5.my_number, 8)
-    
+        
     def test_base_save(self):
         """ Method to test if updated after save """
 
@@ -125,6 +153,43 @@ class TestBaseClass(unittest.TestCase):
         self.assertIs(type(meow3_json), dict)
         self.assertIs(type(meow4_json), dict)
         self.assertIs(type(meow5_json), dict)
+
+    def test_new_dict(self):
+        """ Method to test when new dict is passed into BaseModel """
+        meow1Json = self.meow1.to_dict()
+        newMeow1 = BaseModel(**meow1Json)
+        self.assertEqual(newMeow1.id, self.meow1.id)
+        self.assertIsNot(newMeow1, self.meow1)
+        self.assertIsInstance(newMeow1.created_at, datetime)
+        self.assertIsInstance(newMeow1.updated_at, datetime)
+        
+        meow2Json = self.meow2.to_dict()
+        newMeow2 = BaseModel(**meow2Json)
+        self.assertEqual(newMeow2.id, self.meow2.id)
+        self.assertIsNot(newMeow2, self.meow2)
+        self.assertIsInstance(newMeow2.created_at, datetime)
+        self.assertIsInstance(newMeow2.updated_at, datetime)
+        
+        meow3Json = self.meow3.to_dict()
+        newMeow3 = BaseModel(**meow3Json)
+        self.assertEqual(newMeow3.id, self.meow3.id)
+        self.assertIsNot(newMeow3, self.meow3)
+        self.assertIsInstance(newMeow3.created_at, datetime)
+        self.assertIsInstance(newMeow3.updated_at, datetime)
+        
+        meow4Json = self.meow4.to_dict()
+        newMeow4 = BaseModel(**meow4Json)
+        self.assertEqual(newMeow4.id, self.meow4.id)
+        self.assertIsNot(newMeow4, self.meow4)
+        self.assertIsInstance(newMeow4.created_at, datetime)
+        self.assertIsInstance(newMeow4.updated_at, datetime)
+
+        meow5Json = self.meow5.to_dict()
+        newMeow5 = BaseModel(**meow5Json)
+        self.assertEqual(newMeow5.id, self.meow5.id)
+        self.assertIsNot(newMeow5, self.meow5)
+        self.assertIsInstance(newMeow5.created_at, datetime)
+        self.assertIsInstance(newMeow5.updated_at, datetime)
 
     def test_dict_class_attr(self):
         """ Method to test if to dict adds __class__ to attr """
@@ -195,72 +260,4 @@ class TestBaseClass(unittest.TestCase):
         self.assertEqual(idMeow4, testMeow4[1])
         self.assertEqual(dictMeow4, testMeow4[2])
 
-    def test_new_dict(self):
-        """ Method to test when new dict is passed into BaseModel """
-        meow1Json = self.meow1.to_dict()
-        newMeow1 = BaseModel(**meow1Json)
-        self.assertEqual(newMeow1.id, self.meow1.id)
-        self.assertIsNot(newMeow1, self.meow1)
-        self.assertIsInstance(newMeow1.created_at, datetime)
-        self.assertIsInstance(newMeow1.updated_at, datetime)
-        
-        meow2Json = self.meow2.to_dict()
-        newMeow2 = BaseModel(**meow2Json)
-        self.assertEqual(newMeow2.id, self.meow2.id)
-        self.assertIsNot(newMeow2, self.meow2)
-        self.assertIsInstance(newMeow2.created_at, datetime)
-        self.assertIsInstance(newMeow2.updated_at, datetime)
-        
-        meow3Json = self.meow3.to_dict()
-        newMeow3 = BaseModel(**meow3Json)
-        self.assertEqual(newMeow3.id, self.meow3.id)
-        self.assertIsNot(newMeow3, self.meow3)
-        self.assertIsInstance(newMeow3.created_at, datetime)
-        self.assertIsInstance(newMeow3.updated_at, datetime)
-        
-        meow4Json = self.meow4.to_dict()
-        newMeow4 = BaseModel(**meow4Json)
-        self.assertEqual(newMeow4.id, self.meow4.id)
-        self.assertIsNot(newMeow4, self.meow4)
-        self.assertIsInstance(newMeow4.created_at, datetime)
-        self.assertIsInstance(newMeow4.updated_at, datetime)
-
-        meow5Json = self.meow5.to_dict()
-        newMeow5 = BaseModel(**meow5Json)
-        self.assertEqual(newMeow5.id, self.meow5.id)
-        self.assertIsNot(newMeow5, self.meow5)
-        self.assertIsInstance(newMeow5.created_at, datetime)
-        self.assertIsInstance(newMeow5.updated_at, datetime)
-        
-        
-        
-"""
-
->>> my_mod.meow = "cat"
->>> print(my_mod.meow)
-cat
-
-
-****creating new attribute for new meow***
->>> print(newMeow.name)
-
->>> newMeow.name = "MEE-OW"
->>> print(newMeow.name)
-MEE-OW
->>> print(newMeow.to_dict())
-{'updated_at': '2021-02-11T02:46:55.344351', 'name': 'MEE-OW', 'created_at': '2021-02-11T02:40:56.967147', 'id': '56087bb8-4a89-4e6d-8e6a-f60ddc2c871f', '__class__': 'BaseModel'}
-
->>> theNEWestmeow = BaseModel(**newestMeow)
->>> print(theNEWestmeow)
-[BaseModel] (5d0d5322-bf4b-4d72-a067-accdd0a5b8da) {'updated_at': datetime.datetime(2021, 2, 11, 2, 55, 48, 194166), 'created_at': datetime.datetime(2021, 2, 11, 2, 55, 48, 194122), 'id': '5d0d5322-bf4b-4d72-a067-accdd0a5b8da'}
->>>
-
->>> theNEWestmeow = BaseModel(**newestMeow)
->>> print(theNEWestmeow)
-[BaseModel] (5d0d5322-bf4b-4d72-a067-accdd0a5b8da) {'updated_at': datetime.datetime(2021, 2, 11, 2, 55, 48, 194166), 'created_at': datetime.datetime(2021, 2, 11, 2, 55, 48, 194122), 'id': '5d0d5322-bf4b-4d72-a067-accdd0a5b8da'}
->>> print(theNEWestmeow)
-[BaseModel] (5d0d5322-bf4b-4d72-a067-accdd0a5b8da) {'updated_at': datetime.datetime(2021, 2, 11, 2, 55, 48, 194166), 'created_at': datetime.datetime(2021, 2, 11, 2, 55, 48, 194122), 'id': '5d0d5322-bf4b-4d72-a067-accdd0a5b8da'}
-
->>> print(newestMeow)
-{'updated_at': '2021-02-11T02:46:55.344351', 'name': 'MEE-OW', 'created_at': '2021-02-11T02:40:56.967147', 'id': '56087bb8-4a89-4e6d-8e6a-f60ddc2c871f', '__class__': 'BaseModel'}
-"""
+    
