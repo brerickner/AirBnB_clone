@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from models import BaseModel
+from models import storage
 import cmd
 """ This module creates the console class """
 
@@ -25,37 +26,41 @@ class HBNBCommand(cmd.Cmd):
         """ Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id """
         if classname == "BaseModel":
             new = BaseModel()
-            new.save
+            new.save()
             print(new.id)
         elif classname:
             print("** class doesn't exist **")
         else:
             print("** class name missing **")
 
-    def show(self, classname, instid):
+    def do_show(self, usrinpt):
         """ Prints the string representation of an instance based on the class name and id """
         # find based on id (stored in instid)
         # print instance
-        if len(classname) < 1:
+        if usrinpt is None:
             print("** class name missing **")
-        elif classname != "BaseModel":
-            print("** class doesn't exist **")
-        elif len(id) < 1:
-            print("** instance id missing **")
         else:
-            # find based on id (stored in instid)
-            # if id doesn't exist
-                # print("** no instance found **")
-            # print instance
-            pass
+            ininargs = usrinpt.split()
+            if ininargs[0] != "BaseModel":
+               print("** class doesn't exist **")
+            elif len(inargs) < 2:
+                print("** instance id missing **")
+            else:
+                print("{}.{}".format(inargs[0], inargs[1])
+                # find based on id (stored in instid)
+                # if id doesn't exist
+                    # print("** no instance found **")
+                # print instance
 
-    def destroy(self, classname, instid):
+    def do_destroy(self, usrinpt):
         """ Deletes an instance based on the class name and id (save the change into the JSON file) """
-        if len(classname) < 1:
+        # inargs[0] = classname, inargs[1] = instid
+        inargs = usrinpt.split()
+        if not inargs:
             print("** class name missing **")
-        elif classname != "BaseModel":
+        elif inargs[0] != "BaseModel":
             print("** class doesn't exist **")
-        elif len(id) < 1:
+        elif len(inargs) < 2:
             print("** instance id missing **")
         else:
             # find based on id (stored in instid)
@@ -65,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
             # save
             pass
 
-    def all(self, classname):
+    def do_all(self, classname):
         """ Prints all string representation of all instances based or not on the class name """
         if classname != "BaseModel":
             print("** class doesn't exist **")
@@ -74,18 +79,20 @@ class HBNBCommand(cmd.Cmd):
             # print every instance
             pass
 
-    def update(self, classname, instid, attr, value):
+    def do_update(self, usrinpt):
         """ Updates an instance based on the class name and id by adding
         or updating attribute (save the change into the JSON file) """
-        if len(classname) < 1:
+        #inargs = [classname, instid, attr, value]
+        inargs = usrinpt.split()
+        if len(inargs) < 1:
             print("** class name missing **")
-        elif classname != "BaseModel":
+        elif inargs[0] != "BaseModel":
             print("** class doesn't exist **")
-        elif len(id) < 1:
+        elif len(inargs) < 2:
             print("** instance id missing **")
-        elif len(attr) < 1:
+        elif len(inargs) < 3:
             print("** attribute name missing **")
-        elif len(value) < 1:
+        elif len(inargs) < 4:
             print("** value missing **")
         else:
             # find based on id (stored in instid)
@@ -93,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
                 # print("** no instance found **")
             # inst.attr = value
             # save
-        pass
+            pass
 
 if __name__ == '__main__':
         """ Enters console loop """
