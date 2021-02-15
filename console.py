@@ -37,16 +37,16 @@ class HBNBCommand(cmd.Cmd):
         """ Prints the string representation of an instance based on the class name and id """
         # find based on id (stored in instid)
         # print instance
-        if usrinpt is None:
+        if len(usrinpt) < 1:
             print("** class name missing **")
         else:
-            ininargs = usrinpt.split()
-            if ininargs[0] != "BaseModel":
+            inargs = usrinpt.split()
+            if inargs[0] != "BaseModel":
                print("** class doesn't exist **")
             elif len(inargs) < 2:
                 print("** instance id missing **")
             else:
-                print("{}.{}".format(inargs[0], inargs[1])
+                print("{}.{}".format(inargs[0], inargs[1]))
                 # find based on id (stored in instid)
                 # if id doesn't exist
                     # print("** no instance found **")
@@ -72,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, classname):
         """ Prints all string representation of all instances based or not on the class name """
-        if classname != "BaseModel":
+        if len(classname) > 0 and classname != "BaseModel":
             print("** class doesn't exist **")
         else:
             # take everything in __obj of storage file
@@ -81,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, usrinpt):
         """ Updates an instance based on the class name and id by adding
-        or updating attribute (save the change into the JSON file) """
+        #or updating attribute (save the change into the JSON file) """
         #inargs = [classname, instid, attr, value]
         inargs = usrinpt.split()
         if len(inargs) < 1:
