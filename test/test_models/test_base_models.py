@@ -17,7 +17,28 @@ class TestBaseClass(unittest.TestCase):
         self.meow4 = BaseModel(name=None, id=None, number=None)
         self.meow5 = BaseModel()
         
-    #**************UNLOCK AND SOLVE FOR FREE CHECKS********************
+    def test_private(self):
+        """Method to test if basemodel attributes are private"""
+        with self.assertRaises(AttributeError):
+            self.meow1 = BaseModel().__file_path
+        with self.assertRaises(AttributeError):
+            self.meow1 = BaseModel().__objects
+        
+        with self.assertRaises(AttributeError):
+            self.meow2 = BaseModel().__file_path
+        with self.assertRaises(AttributeError):
+            self.meow2 = BaseModel().__objects
+
+        with self.assertRaises(AttributeError):
+            self.meow3 = BaseModel().__file_path
+        with self.assertRaises(AttributeError):
+            self.meow3 = BaseModel().__objects
+
+        with self.assertRaises(AttributeError):
+            self.meow4 = BaseModel().__file_path
+        with self.assertRaises(AttributeError):
+            self.meow4 = BaseModel().__objects
+
     def test_with_none(self):
         """ Method to test when **kwargs value is None """
         self.assertIsInstance(self.meow4.id, str)
@@ -26,7 +47,7 @@ class TestBaseClass(unittest.TestCase):
         self.assertNotEqual(self.meow3.id, self.meow4.id)
         self.assertNotEqual(self.meow1.id, self.meow4.id)
 
-    def test_baseModel_init(self):
+    def test_init_type(self):
         """ Method to test unique id generated for base_model """
 
         self.assertIsInstance(self.meow1.created_at, datetime)
@@ -81,6 +102,7 @@ class TestBaseClass(unittest.TestCase):
         self.assertLess(uptime4, self.meow4.updated_at)
         self.assertLess(uptime5, self.meow5.updated_at)
 
+
     def test_base_to_dict(self):
         """ Method to test dict method turned cls BaseModel into dict """
 
@@ -102,6 +124,20 @@ class TestBaseClass(unittest.TestCase):
         self.assertIs(type(meow4_json), dict)
         self.assertIs(type(meow5_json), dict)
 
+    def test_dict_class_attr(self):
+        """ Method to test if to dict adds __class__ to attr """
+        meow1_dict = self.meow1.to_dict()
+        meow2_dict = self.meow2.to_dict()
+        meow3_dict = self.meow3.to_dict()
+        meow4_dict = self.meow4.to_dict()
+        meow5_dict = self.meow5.to_dict()
+
+        self.assertTrue(hasattr(self.meow1, "__class__"))
+        self.assertTrue(hasattr(self.meow2, "__class__"))
+        self.assertTrue(hasattr(self.meow3, "__class__"))
+        self.assertTrue(hasattr(self.meow4, "__class__"))
+        self.assertTrue(hasattr(self.meow5, "__class__"))
+
     def test_json_key_type(self):
         """ Method to test if json keys are all strings """
         
@@ -117,34 +153,51 @@ class TestBaseClass(unittest.TestCase):
             self.assertEquals(type(meow3_json[key]), str)
             self.assertEquals(type(meow4_json[key]), str)
             self.assertEquals(type(meow5_json[key]), str)
-   
 
+    def test_str_repr(self):
+        """ Method to test is str repr is correct """
+        
+        testMeow1 = str(self.meow1).split(" ", 2)
+        classMeow1 = "[{}]".format(self.meow1.__class__.__name__)
+        idMeow1 = "({})".format(self.meow1.id)
+        dictMeow1 = "{}".format(self.meow1.__dict__)
+        
+        testMeow2 = str(self.meow2).split(" ", 2)
+        classMeow2 = "[{}]".format(self.meow2.__class__.__name__)
+        idMeow2 = "({})".format(self.meow2.id)
+        dictMeow2 = "{}".format(self.meow2.__dict__)
+        
+        testMeow3 = str(self.meow3).split(" ", 2)
+        classMeow3 = "[{}]".format(self.meow3.__class__.__name__)
+        idMeow3 = "({})".format(self.meow3.id)
+        dictMeow3 = "{}".format(self.meow3.__dict__)
+        
+        testMeow4 = str(self.meow4).split(" ", 2)
+        classMeow4 = "[{}]".format(self.meow4.__class__.__name__)
+        idMeow4 = "({})".format(self.meow4.id)
+        dictMeow4 = "{}".format(self.meow4.__dict__)
 
+        self.assertEqual(classMeow1, testMeow1[0])
+        self.assertEqual(idMeow1, testMeow1[1])
+        self.assertEqual(dictMeow1, testMeow1[2])
 
+        self.assertEqual(classMeow2, testMeow2[0])
+        self.assertEqual(idMeow2, testMeow2[1])
+        self.assertEqual(dictMeow2, testMeow2[2])
 
+        self.assertEqual(classMeow3, testMeow3[0])
+        self.assertEqual(idMeow3, testMeow3[1])
+        self.assertEqual(dictMeow3, testMeow3[2])
+
+        self.assertEqual(classMeow4, testMeow4[0])
+        self.assertEqual(idMeow4, testMeow4[1])
+        self.assertEqual(dictMeow4, testMeow4[2])
 """
 
 >>> my_mod.meow = "cat"
 >>> print(my_mod.meow)
 cat
 
->>> type(my_mod.number)
-<class 'int'>
-
->>> type(my_mod.meow)
-<class 'str'>
-
->>> print(type(my_mod.created_at))
-<class 'datetime.datetime'>
-
->>> print(type(newMeow))
-<class 'models.base_model.BaseModel'>
-
->>> print(type(newMeow.created_at))
-<class 'datetime.datetime'>
-
->>> meow is newMeow
-False
 
 ****creating new attribute for new meow***
 >>> print(newMeow.name)
