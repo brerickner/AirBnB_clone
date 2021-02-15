@@ -65,6 +65,9 @@ class TestBaseClass(unittest.TestCase):
         self.assertNotEqual(self.meow1.id, self.meow3.id)
         self.assertNotEqual(self.meow1.id, self.meow2.id)
         self.assertNotEqual(self.meow3.id, self.meow2.id)
+        self.assertNotEqual(self.meow4.id, self.meow3.id)
+        self.assertNotEqual(self.meow4.id, self.meow1.id)
+        self.assertNotEqual(self.meow4.id, self.meow2.id)
 
     def test_str_format(self):
         """ Method to test if str format is printing correctly """
@@ -101,7 +104,6 @@ class TestBaseClass(unittest.TestCase):
         self.assertLess(uptime3, self.meow3.updated_at)
         self.assertLess(uptime4, self.meow4.updated_at)
         self.assertLess(uptime5, self.meow5.updated_at)
-
 
     def test_base_to_dict(self):
         """ Method to test dict method turned cls BaseModel into dict """
@@ -192,6 +194,46 @@ class TestBaseClass(unittest.TestCase):
         self.assertEqual(classMeow4, testMeow4[0])
         self.assertEqual(idMeow4, testMeow4[1])
         self.assertEqual(dictMeow4, testMeow4[2])
+
+    def test_new_dict(self):
+        """ Method to test when new dict is passed into BaseModel """
+        meow1Json = self.meow1.to_dict()
+        newMeow1 = BaseModel(**meow1Json)
+        self.assertEqual(newMeow1.id, self.meow1.id)
+        self.assertIsNot(newMeow1, self.meow1)
+        self.assertIsInstance(newMeow1.created_at, datetime)
+        self.assertIsInstance(newMeow1.updated_at, datetime)
+        
+        meow2Json = self.meow2.to_dict()
+        newMeow2 = BaseModel(**meow2Json)
+        self.assertEqual(newMeow2.id, self.meow2.id)
+        self.assertIsNot(newMeow2, self.meow2)
+        self.assertIsInstance(newMeow2.created_at, datetime)
+        self.assertIsInstance(newMeow2.updated_at, datetime)
+        
+        meow3Json = self.meow3.to_dict()
+        newMeow3 = BaseModel(**meow3Json)
+        self.assertEqual(newMeow3.id, self.meow3.id)
+        self.assertIsNot(newMeow3, self.meow3)
+        self.assertIsInstance(newMeow3.created_at, datetime)
+        self.assertIsInstance(newMeow3.updated_at, datetime)
+        
+        meow4Json = self.meow4.to_dict()
+        newMeow4 = BaseModel(**meow4Json)
+        self.assertEqual(newMeow4.id, self.meow4.id)
+        self.assertIsNot(newMeow4, self.meow4)
+        self.assertIsInstance(newMeow4.created_at, datetime)
+        self.assertIsInstance(newMeow4.updated_at, datetime)
+
+        meow5Json = self.meow5.to_dict()
+        newMeow5 = BaseModel(**meow5Json)
+        self.assertEqual(newMeow5.id, self.meow5.id)
+        self.assertIsNot(newMeow5, self.meow5)
+        self.assertIsInstance(newMeow5.created_at, datetime)
+        self.assertIsInstance(newMeow5.updated_at, datetime)
+        
+        
+        
 """
 
 >>> my_mod.meow = "cat"
