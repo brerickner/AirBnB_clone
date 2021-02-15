@@ -35,12 +35,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, usrinpt):
         """ Prints the string representation of an instance based on the class name and id """
-        # find based on id (stored in instid)
-        # print instance
         if len(usrinpt) < 1:
             print("** class name missing **")
         else:
             inargs = usrinpt.split()
+            # inargs = [class, id]
             if inargs[0] != "BaseModel":
                print("** class doesn't exist **")
             elif len(inargs) < 2:
@@ -48,6 +47,10 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("{}.{}".format(inargs[0], inargs[1]))
                 # find based on id (stored in instid)
+                storage.reload()
+                for dict in _FileStorage.__objects:
+                    if dict[id] == inargs[1]:
+                        print("made it {}".format(dict))
                 # if id doesn't exist
                     # print("** no instance found **")
                 # print instance
