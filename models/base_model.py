@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 import models
 
+
 class BaseModel:
 
     """ This class defines all common attributes for other classes """
@@ -19,7 +20,6 @@ class BaseModel:
         self.created_at = datetime.now()
         # updated_at: updates every time changed
         self.updated_at = datetime.now()
-        
 
         if len(kwargs) > 0:
             for key in kwargs:
@@ -38,7 +38,7 @@ class BaseModel:
                             datetime.strptime(kwargs[key],
                                               dateString))
         elif len(kwargs) == 0:
-           models.storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """This sets the string format"""

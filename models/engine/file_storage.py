@@ -14,8 +14,6 @@ class FileStorage:
     __objects = {}
     classies = {'BaseModel': BaseModel}
 
-
-
     # DO THESE NEED TO BE INSTANCE METHODS OR CLASS METHODS?
     def all(self):
         """ Returns the dictionary stored in __objects """
@@ -23,19 +21,20 @@ class FileStorage:
 
     def new(self, obj):
         """ Sets obj with key <obj class name>.id in __objects """
-        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        FileStorage.__objects["{}.{}".
+                              format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """ Serializes __objects to the JSON file """
-        
+
         # I don't fully understand where we're getting the value to save
-      
+
         newDict = {}
         for k, v in FileStorage.__objects.items():
             newDict[k] = v.to_dict()
         with open(FileStorage.__file_path, mode='w') as f:
             json.dump(newDict, f)
-               
+
     def reload(self):
         """ deserializes the JSON file to __objects """
         if path.isfile(self.__file_path):
