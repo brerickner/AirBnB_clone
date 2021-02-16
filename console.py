@@ -47,15 +47,17 @@ class HBNBCommand(cmd.Cmd):
             elif len(inargs) < 2:
                 print("** instance id missing **")
             else:
-                print("{}.{}".format(inargs[0], inargs[1]))
                 # find based on id (stored in instid)
                 allInsts = storage.all()
-                for key in allInsts.keys():
+                check = 0
+                for key in allInsts:
+                    # ERROR: THIS NEEDS TO PRINT IN STRING FORMAT
                     if key == "{}.{}".format(inargs[0], inargs[1]):
-                        print("made it {}".format(key))
-                # if id doesn't exist
-                    # print("** no instance found **")
-                # print instance
+                        print(key)
+                        check = 1
+                        break
+                if check == 0:
+                    print("** no instance found **")
 
     def do_destroy(self, usrinpt):
         """ Deletes an instance based on the class name and id (save the change into the JSON file) """
@@ -68,12 +70,16 @@ class HBNBCommand(cmd.Cmd):
         elif len(inargs) < 2:
             print("** instance id missing **")
         else:
-            # find based on id (stored in instid)
-            # if id does not exist
-                # print("** no instance found **")
-            # delete
-            # save
-            pass
+            allInsts = storage.all()
+            check = 0
+            for key in allInsts:
+                if key == "{}.{}".format(inargs[0], inargs[1]):
+                    del allInsts[key]
+                    storage.save
+                    check = 1
+                    break
+                if check == 0:
+                    print("** no instance found **")
 
     def do_all(self, usrinpt):
         """ Prints all string representation of all instances based or not on the class name """
