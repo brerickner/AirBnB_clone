@@ -146,11 +146,8 @@ class HBNBCommand(cmd.Cmd):
             for key,value in allInsts.items():
                 if key == "{}.{}".format(inargs[0], inargs[1]):
                     collectvalues.append(value)
-                    print(key, value)
                     setattr(value, inargs[2], inargs[3])
-                    print(value.__dict__)
                     #value.inargs[2] = inargs[3]
-                    print(value)
                     check = 1
                     break
             if check == 0:
