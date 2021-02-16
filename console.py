@@ -1,7 +1,14 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 from models import BaseModel
 from models import storage
+=======
+from models.base_model import BaseModel
+
+>>>>>>> 6c6c7ee06641555e2c5da100e807e12f157ed08f
 import cmd
+from models import storage
+
 """ This module creates the console class """
 
 
@@ -47,10 +54,17 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("{}.{}".format(inargs[0], inargs[1]))
                 # find based on id (stored in instid)
+<<<<<<< HEAD
                 storage.reload()
                 for dict in _FileStorage.__objects:
                     if dict[id] == inargs[1]:
                         print("made it {}".format(dict))
+=======
+                allInsts = storage.all()
+                for key in allInsts.keys():
+                    if key == "{}.{}".format(inargs[0], inargs[1]):
+                        print("made it {}".format(key))
+>>>>>>> 6c6c7ee06641555e2c5da100e807e12f157ed08f
                 # if id doesn't exist
                     # print("** no instance found **")
                 # print instance
@@ -73,14 +87,26 @@ class HBNBCommand(cmd.Cmd):
             # save
             pass
 
+<<<<<<< HEAD
     def do_all(self, classname):
         """ Prints all string representation of all instances based or not on the class name """
         if len(classname) > 0 and classname != "BaseModel":
+=======
+    def do_all(self, usrinpt):
+        """ Prints all string representation of all instances based or not on the class name """
+        clsList = []
+        if not usrinpt and usrinpt != "BaseModel":
+>>>>>>> 6c6c7ee06641555e2c5da100e807e12f157ed08f
             print("** class doesn't exist **")
         else:
-            # take everything in __obj of storage file
-            # print every instance
-            pass
+            allInsts = storage.all()
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if usrinpt == findClass[0]:
+                   # clsFound = str(key) + str(value) 
+                    clsList.append(str(value))
+            print(clsList)
+
 
     def do_update(self, usrinpt):
         """ Updates an instance based on the class name and id by adding
