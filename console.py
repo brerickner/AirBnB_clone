@@ -127,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
         #or updating attribute (save the change into the JSON file) 
         # format: [classname, instid, attr, value]"""
         #inargs = [classname, instid, attr, value]
-        inargs = usrinpt.split()
+        inargs = usrinpt.split(" ", 3)
         if len(inargs) < 1:
             print("** class name missing **")
         elif inargs[0] not in classdict.keys():
@@ -140,21 +140,37 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
         else:
             # find based on id (stored in instid)
+
             allInsts = storage.all()
             check = 0
             collectvalues =[]
             for key,value in allInsts.items():
                 if key == "{}.{}".format(inargs[0], inargs[1]):
-                    collectvalues.append(value)
-                    setattr(value, inargs[2], inargs[3])
-                    #value.inargs[2] = inargs[3]
-                    check = 1
-                    break
-            if check == 0:
-                print("** no instance found **")
-            # inst.attr = value
-            # save
-            pass
+                    collectvalues.append(value)    
+                    try:
+                        setattr(value, inargs[2], int(inargs[3]))
+                        check = 1
+                    except:
+                        try: 
+                            setattr(value, inargs[2], float(inargs[3]))
+                            check = 1
+                        except:
+                            try: 
+                                arg3String = str(inargs[3]).split('\"')
+                                if len(arg3String) > 0: 
+                                    setattr(value, inargs[2], arg3String[1])
+                                    print(str(value))
+                                    #value.inargs[2] = inargs[3]
+                                    check = 1
+                                    break
+                            except:
+                                setattr(value, inargs[2], arg3String[0])
+                                check = 1
+        if check == 0:
+            print("** no instance found **")
+        # inst.attr = value
+        # save
+        pass
 
 if __name__ == '__main__':
         """ Enters console loop """
