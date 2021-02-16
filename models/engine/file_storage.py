@@ -1,13 +1,13 @@
 #!/usr/env/python3
 """ This module creates a class to manage file storage """
 
-from .models import BaseModel
-from .models.user import User
-from .models.city import City
-from .models.state import State
-from .models.amentity import Amenity
-from .models.place import Place
-from .models.review import Review
+from models import BaseModel
+from models.user import User
+from models.city import City
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 import json
 from os import path

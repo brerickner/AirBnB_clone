@@ -8,9 +8,6 @@ class Review(BaseModel):
 
     """ This Review class inherits BaseModel """
 
-    place_id:
-        ""
-    user_id:
-        ""
-    text:
-        ""
+    place_id = ""
+    user_id = ""
+    text = ""

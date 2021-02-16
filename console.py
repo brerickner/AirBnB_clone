@@ -3,9 +3,23 @@ from models.base_model import BaseModel
 
 import cmd
 from models import storage
+from models.user import User
+from models.city import City
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 """ This module creates the console class """
 
+classdict = {'BaseModel': BaseModel,
+            'User': User,
+            'State': State,
+            'City': City,
+            'Amenity': Amenity,
+            'Place': Place,
+            'Review': Review
+            }
 
 class HBNBCommand(cmd.Cmd):
     """ This class creates an interactive console """
@@ -26,13 +40,16 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, classname):
         """ Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id """
-        if classname == "BaseModel":
-            new = BaseModel()
-            new.save()
-            print(new.id)
-        elif classname:
+        check = 0
+        for key, value in classdict.items():
+            if classname == key:
+                new = value()
+                new.save()
+                print(new.id)
+                check = 1
+        if classname and check == 0:
             print("** class doesn't exist **")
-        else:
+        elif check == 0:
             print("** class name missing **")
 
     def do_show(self, usrinpt):
@@ -42,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             inargs = usrinpt.split()
             # inargs = [class, id]
-            if inargs[0] != "BaseModel":
+            if inargs[0] not in classdict.keys():
                print("** class doesn't exist **")
             elif len(inargs) < 2:
                 print("** instance id missing **")
@@ -50,11 +67,10 @@ class HBNBCommand(cmd.Cmd):
                 # find based on id (stored in instid)
                 allInsts = storage.all()
                 check = 0
-                collectKeys =[]
+                collectvalues =[]
                 for key,value in allInsts.items():
-                    # ERROR: THIS NEEDS TO PRINT IN STRING FORMAT
                     if key == "{}.{}".format(inargs[0], inargs[1]):
-                        collectKeys.append(str(value))
+                        collectvalues.append(str(value))
                         print(value)
                         check = 1
                         break
@@ -86,9 +102,13 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, usrinpt):
         """ Prints all string representation of all instances based or not on the class name """
         clsList = []
-        if not usrinpt and usrinpt != "BaseModel":
-            print("** class doesn't exist **")
-        else:
+        check = 0
+        if not usrinpt:
+            allInsts = storage.all()
+            for key, value in allInsts.items():
+                print(value)
+            check = 1
+        if usrinpt in classdict.keys():
             allInsts = storage.all()
             for key, value in allInsts.items():
                 findClass = key.split(".")
@@ -96,6 +116,10 @@ class HBNBCommand(cmd.Cmd):
                    # clsFound = str(key) + str(value) 
                     clsList.append(str(value))
             print(clsList)
+            check = 1
+        elif check == 0:
+            print("** class doesn't exist **")
+
 
 
     def do_update(self, usrinpt):
@@ -115,8 +139,21 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
         else:
             # find based on id (stored in instid)
-            # if no id found
-                # print("** no instance found **")
+            allInsts = storage.all()
+            check = 0
+            collectvalues =[]
+            for key,value in allInsts.items():
+                if key == "{}.{}".format(inargs[0], inargs[1]):
+                    collectvalues.append(value)
+                    print(key, value)
+                    setattr(value, inargs[2], inargs[3])
+                    print(value.__dict__)
+                    #value.inargs[2] = inargs[3]
+                    print(value)
+                    check = 1
+                    break
+            if check == 0:
+                print("** no instance found **")
             # inst.attr = value
             # save
             pass
