@@ -2,10 +2,10 @@
 """ This module creates a class to manage file storage """
 
 from .models import BaseModel
-from .models import User
+from .models.user import User
+from .models.user import State
 import json
 from os import path
-from . import models
 
 
 class FileStorage:
@@ -15,7 +15,12 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
     classies = {'BaseModel': BaseModel,
-                'User': User
+                'User': User,
+                'State': State,
+                'City': City,
+                'Amenity': Amenity,
+                'Place': Place,
+                'Review': Review
                 }
 
     # DO THESE NEED TO BE INSTANCE METHODS OR CLASS METHODS?
