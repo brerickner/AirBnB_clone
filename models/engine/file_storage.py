@@ -1,18 +1,22 @@
 #!/usr/env/python3
 """ This module creates a class to manage file storage """
 
-from models import BaseModel
+from .models import BaseModel
+from .models import User
 import json
 from os import path
-import models
+from . import models
 
 
 class FileStorage:
+
     """ This class manages file storage for other classes """
 
     __file_path = 'file.json'
     __objects = {}
-    classies = {'BaseModel': BaseModel}
+    classies = {'BaseModel': BaseModel,
+                'User': User
+                }
 
     # DO THESE NEED TO BE INSTANCE METHODS OR CLASS METHODS?
     def all(self):
