@@ -124,12 +124,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, usrinpt):
         """ Updates an instance based on the class name and id by adding
-        #or updating attribute (save the change into the JSON file) """
+        #or updating attribute (save the change into the JSON file) 
+        # format: [classname, instid, attr, value]"""
         #inargs = [classname, instid, attr, value]
         inargs = usrinpt.split()
         if len(inargs) < 1:
             print("** class name missing **")
-        elif inargs[0] != "BaseModel":
+        elif inargs[0] not in classdict.keys():
             print("** class doesn't exist **")
         elif len(inargs) < 2:
             print("** instance id missing **")
