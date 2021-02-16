@@ -50,10 +50,12 @@ class HBNBCommand(cmd.Cmd):
                 # find based on id (stored in instid)
                 allInsts = storage.all()
                 check = 0
-                for key in allInsts:
+                collectKeys =[]
+                for key,value in allInsts.items():
                     # ERROR: THIS NEEDS TO PRINT IN STRING FORMAT
                     if key == "{}.{}".format(inargs[0], inargs[1]):
-                        print(key)
+                        collectKeys.append(str(value))
+                        print(value)
                         check = 1
                         break
                 if check == 0:
