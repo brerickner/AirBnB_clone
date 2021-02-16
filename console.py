@@ -75,14 +75,20 @@ class HBNBCommand(cmd.Cmd):
             # save
             pass
 
-    def do_all(self, classname):
+    def do_all(self, usrinpt):
         """ Prints all string representation of all instances based or not on the class name """
-        if len(classname) > 0 and classname != "BaseModel":
+        clsList = []
+        if not usrinpt and usrinpt != "BaseModel":
             print("** class doesn't exist **")
         else:
-            # take everything in __obj of storage file
-            # print every instance
-            pass
+            allInsts = storage.all()
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if usrinpt == findClass[0]:
+                   # clsFound = str(key) + str(value) 
+                    clsList.append(str(value))
+            print(clsList)
+
 
     def do_update(self, usrinpt):
         """ Updates an instance based on the class name and id by adding
