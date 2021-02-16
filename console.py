@@ -1,11 +1,6 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
-from models import BaseModel
-from models import storage
-=======
 from models.base_model import BaseModel
 
->>>>>>> 6c6c7ee06641555e2c5da100e807e12f157ed08f
 import cmd
 from models import storage
 
@@ -52,22 +47,17 @@ class HBNBCommand(cmd.Cmd):
             elif len(inargs) < 2:
                 print("** instance id missing **")
             else:
-                print("{}.{}".format(inargs[0], inargs[1]))
                 # find based on id (stored in instid)
-<<<<<<< HEAD
-                storage.reload()
-                for dict in _FileStorage.__objects:
-                    if dict[id] == inargs[1]:
-                        print("made it {}".format(dict))
-=======
                 allInsts = storage.all()
-                for key in allInsts.keys():
+                check = 0
+                for key in allInsts:
+                    # ERROR: THIS NEEDS TO PRINT IN STRING FORMAT
                     if key == "{}.{}".format(inargs[0], inargs[1]):
-                        print("made it {}".format(key))
->>>>>>> 6c6c7ee06641555e2c5da100e807e12f157ed08f
-                # if id doesn't exist
-                    # print("** no instance found **")
-                # print instance
+                        print(key)
+                        check = 1
+                        break
+                if check == 0:
+                    print("** no instance found **")
 
     def do_destroy(self, usrinpt):
         """ Deletes an instance based on the class name and id (save the change into the JSON file) """
@@ -80,23 +70,21 @@ class HBNBCommand(cmd.Cmd):
         elif len(inargs) < 2:
             print("** instance id missing **")
         else:
-            # find based on id (stored in instid)
-            # if id does not exist
-                # print("** no instance found **")
-            # delete
-            # save
-            pass
+            allInsts = storage.all()
+            check = 0
+            for key in allInsts:
+                if key == "{}.{}".format(inargs[0], inargs[1]):
+                    del allInsts[key]
+                    storage.save
+                    check = 1
+                    break
+                if check == 0:
+                    print("** no instance found **")
 
-<<<<<<< HEAD
-    def do_all(self, classname):
-        """ Prints all string representation of all instances based or not on the class name """
-        if len(classname) > 0 and classname != "BaseModel":
-=======
     def do_all(self, usrinpt):
         """ Prints all string representation of all instances based or not on the class name """
         clsList = []
         if not usrinpt and usrinpt != "BaseModel":
->>>>>>> 6c6c7ee06641555e2c5da100e807e12f157ed08f
             print("** class doesn't exist **")
         else:
             allInsts = storage.all()
