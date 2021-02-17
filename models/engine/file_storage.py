@@ -1,4 +1,4 @@
-#!/usr/env/python3
+#!/usr/bin/python3
 """ This module creates a class to manage file storage """
 
 from models import BaseModel
@@ -8,13 +8,11 @@ from models.state import State
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-
 import json
 from os import path
 
 
 class FileStorage:
-
     """ This class manages file storage for other classes """
 
     __file_path = 'file.json'
@@ -28,7 +26,6 @@ class FileStorage:
                 'Review': Review
                 }
 
-    # DO THESE NEED TO BE INSTANCE METHODS OR CLASS METHODS?
     def all(self):
         """ Returns the dictionary stored in __objects """
         return self.__objects
@@ -40,8 +37,6 @@ class FileStorage:
 
     def save(self):
         """ Serializes __objects to the JSON file """
-
-        # I don't fully understand where we're getting the value to save
 
         newDict = {}
         for k, v in FileStorage.__objects.items():
