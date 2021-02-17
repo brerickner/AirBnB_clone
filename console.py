@@ -24,6 +24,10 @@ class HBNBCommand(cmd.Cmd):
                  }
     prompt = "(hbnb) "
 
+    def do_BaseModel(self, all):
+        """ Prints every instance of BaseClass """
+        self.all = self.do_all("BaseModel")
+
     def emptyline(self):
         """ Skips empty line """
         pass
