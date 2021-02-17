@@ -3,10 +3,10 @@
 
 import unittest
 from datetime import datetime
-from models.base_model import BaseModel
-from models import FileStorage
+from .models.base_model import BaseModel
+from .models import FileStorage
 import os
-import models
+from . import models
 
 
 class TestFileStorageClass(unittest.TestCase):
@@ -27,6 +27,7 @@ class TestFileStorageClass(unittest.TestCase):
         self.meow5 = BaseModel()
         self.storeMeow = FileStorage()
         self.allMeows = models.storage.all()
+        self.reloadMeows = models.storage.reload()
 
     def test_private(self):
         """Method to test if file storage attributes are private"""
@@ -81,3 +82,26 @@ class TestFileStorageClass(unittest.TestCase):
 
         checkStorage = FileStorage._FileStorage__objects
         self.assertDictEqual(self.allMeows, checkStorage)
+
+    def test_reload(self):
+        """ Method to test reload method """
+
+        uptime1 = self.meow1.updated_at
+        uptime2 = self.meow2.updated_at
+        uptime3 = self.meow3.updated_at
+        uptime4 = self.meow4.updated_at
+        uptime5 = self.meow5.updated_at
+
+        self.meow1.save()
+        self.meow2.save()
+        self.meow3.save()
+        self.meow4.save()
+        self.meow5.save()
+
+        self.reloadMeows
+
+        self.assertNotEqual(uptime1, self.meow1.updated_at)
+        self.assertNotEqual(uptime2, self.meow2.updated_at)
+        self.assertNotEqual(uptime3, self.meow3.updated_at)
+        self.assertNotEqual(uptime4, self.meow4.updated_at)
+        self.assertNotEqual(uptime5, self.meow5.updated_at)
