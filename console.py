@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" This module creates the console class """
 from models.base_model import BaseModel
 import cmd
 from models import storage
@@ -8,8 +9,6 @@ from models.state import State
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-
-""" This module creates the console class """
 
 
 class HBNBCommand(cmd.Cmd):
