@@ -39,6 +39,11 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "BaseModel {}".format(finalinpt[1])
             self.show = self.do_show(info)
+        if splitinput[0] == ".destroy":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "BaseModel {}".format(finalinpt[1])
+            self.show = self.do_destroy(info)
 
     def do_User(self, usrinpt):
         """ asses all User input to the correct commands """
@@ -50,6 +55,12 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "User {}".format(finalinpt[1])
             self.show = self.do_show(info)
+        if splitinput[0] == ".destroy":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "User {}".format(finalinpt[1])
+            print(info)
+            self.show = self.do_destroy(info)
 
     def do_State(self, usrinpt):
         """ asses all State input to the correct commands """
@@ -61,6 +72,11 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "State {}".format(finalinpt[1])
             self.show = self.do_show(info)
+        if splitinput[0] == ".destroy":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "State {}".format(finalinpt[1])
+            self.show = self.do_destroy(info)
 
     def do_City(self, usrinpt):
         """ asses all City input to the correct commands """
@@ -72,6 +88,11 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "City {}".format(finalinpt[1])
             self.show = self.do_show(info)
+        if splitinput[0] == ".destroy":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "City {}".format(finalinpt[1])
+            self.show = self.do_destroy(info)
 
     def do_Amenity(self, usrinpt):
         """ asses all Amenity input to the correct commands """
@@ -83,6 +104,11 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "Amenity {}".format(finalinpt[1])
             self.show = self.do_show(info)
+        if splitinput[0] == ".destroy":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "Amenity {}".format(finalinpt[1])
+            self.show = self.do_destroy(info)
 
     def do_Place(self, usrinpt):
         """ asses all Place input to the correct commands """
@@ -94,6 +120,11 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "Place {}".format(finalinpt[1])
             self.show = self.do_show(info)
+        if splitinput[0] == ".destroy":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "Place {}".format(finalinpt[1])
+            self.show = self.do_destroy(info)
 
     def do_Review(self, usrinpt):
         """ asses all Review input to the correct commands """
@@ -105,6 +136,11 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "Review {}".format(finalinpt[1])
             self.show = self.do_show(info)
+        if splitinput[0] == ".destroy":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "Review {}".format(finalinpt[1])
+            self.show = self.do_destroy(info)
 
     def emptyline(self):
         """ Skips empty line """
@@ -163,22 +199,23 @@ class HBNBCommand(cmd.Cmd):
         """ Deletes an instance based on the class
         name and id (save the change into the JSON file) """
         # inargs[0] = classname, inargs[1] = instid
-        inargs = usrinpt.split()
-        if not inargs:
+        if len(usrinpt) < 1:
             print("** class name missing **")
-        elif inargs[0] != "BaseModel":
-            print("** class doesn't exist **")
-        elif len(inargs) < 2:
-            print("** instance id missing **")
         else:
-            allInsts = storage.all()
-            check = 0
-            for key in allInsts:
-                if key == "{}.{}".format(inargs[0], inargs[1]):
-                    del allInsts[key]
-                    storage.save
-                    check = 1
-                    break
+            inargs = usrinpt.split()
+            if inargs[0] not in self.classdict.keys():
+                print("** class doesn't exist **")
+            elif len(inargs) < 2:
+                print("** instance id missing **")
+            else:
+                allInsts = storage.all()
+                check = 0
+                for key in allInsts:
+                    if key == "{}.{}".format(inargs[0], inargs[1]):
+                        del allInsts[key]
+                        storage.save
+                        check = 1
+                        break
                 if check == 0:
                     print("** no instance found **")
 
