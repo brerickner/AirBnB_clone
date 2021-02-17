@@ -142,7 +142,9 @@ class HBNBCommand(cmd.Cmd):
             allInsts = storage.all()
             check = 0
             collectvalues = []
-            if inargs[2] == "id" or inargs[2] == "created_at" or inargs[2] == "updated_at":
+            if inargs[2] == "id" or inargs[2] == "created_at":
+                return
+            if inargs[2] == "updated_at":
                 return
             for key, value in allInsts.items():
                 if key == "{}.{}".format(inargs[0], inargs[1]):
