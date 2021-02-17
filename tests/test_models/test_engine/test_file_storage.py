@@ -3,10 +3,10 @@
 
 import unittest
 from datetime import datetime
-from .models.base_model import BaseModel
-from .models import FileStorage
+from models.base_model import BaseModel
+from models import FileStorage
 import os
-from . import models
+import models
 
 
 class TestFileStorageClass(unittest.TestCase):
@@ -71,6 +71,11 @@ class TestFileStorageClass(unittest.TestCase):
         self.assertTrue(hasattr(meowski, "new"))
         self.assertTrue(hasattr(meowski, "save"))
         self.assertTrue(hasattr(meowski, "reload"))
+
+    def test_storage_type(self):
+        """ Method to test type of storage """
+
+        self.assertIs(type(models.storage), FileStorage)
 
     def test_type_attr(self):
         """ Method to test type of priv attr """
