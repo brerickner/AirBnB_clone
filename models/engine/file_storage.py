@@ -1,4 +1,4 @@
-#!/usr/env/python3
+#!/usr/bin/python3
 """ This module creates a class to manage file storage """
 
 from models import BaseModel
