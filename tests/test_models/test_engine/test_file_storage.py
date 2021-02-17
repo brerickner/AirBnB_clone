@@ -29,6 +29,18 @@ class TestFileStorageClass(unittest.TestCase):
         self.allMeows = models.storage.all()
         self.reloadMeows = models.storage.reload()
 
+    def test_file_empty(self):
+        """ Method to test when storage is empty """
+        if os.path.isfile(self.file):
+            os.remove(self.file)
+
+        self.assertFalse(os.path.isfile('file.json'))
+        noArgMeow = BaseModel()
+        self.assertFalse(os.path.isfile('file.json'))
+        self.assertIs(type(noArgMeow), BaseModel)
+        meowString = "{}.{}".format(noArgMeow.__class__.__name__, noArgMeow.id)
+        self.assertIs(noArgMeow, models.storage.all()[meowString])
+
     def test_private(self):
         """Method to test if file storage attributes are private"""
         with self.assertRaises(AttributeError):
@@ -59,12 +71,14 @@ class TestFileStorageClass(unittest.TestCase):
 
     def test_new_inst_attr(self):
         """ Method to test if instance of file storage inherits attr """
+
         self.storeMeow = FileStorage()
         self.assertTrue(hasattr(self.storeMeow, "_FileStorage__objects"))
         self.assertTrue(hasattr(self.storeMeow, "_FileStorage__file_path"))
 
     def test_has_attr(self):
         """ Method to test File Storage dict attrs """
+
         meowski = FileStorage()
 
         self.assertTrue(hasattr(meowski, "all"))
@@ -79,6 +93,7 @@ class TestFileStorageClass(unittest.TestCase):
 
     def test_type_attr(self):
         """ Method to test type of priv attr """
+
         self.assertIs(type(models.storage._FileStorage__objects), dict)
         self.assertIs(type(models.storage._FileStorage__file_path), str)
 
