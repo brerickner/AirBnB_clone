@@ -85,6 +85,7 @@ class TestFileStorageClass(unittest.TestCase):
         self.assertTrue(hasattr(meowski, "new"))
         self.assertTrue(hasattr(meowski, "save"))
         self.assertTrue(hasattr(meowski, "reload"))
+        self.assertTrue(hasattr(meowski, "__init__"))
 
     def test_storage_type(self):
         """ Method to test type of storage """
@@ -102,6 +103,26 @@ class TestFileStorageClass(unittest.TestCase):
 
         checkStorage = FileStorage._FileStorage__objects
         self.assertDictEqual(self.allMeows, checkStorage)
+
+    def test_original_attr(self):
+        """ Method to test if any item can be an attribute """
+        self.meow5.hello = "world"
+
+        checkStorage = models.storage._FileStorage__objects
+        keyKey = "{}.{}".format(self.meow5.__class__.__name__, self.meow5.id)
+        models.storage.new(self.meow5)
+        models.storage.save()
+        models.storage._FileStorage__objects = {}
+        models.storage.reload()
+        newModel = models.storage._FileStorage__objects[keyKey]
+
+        self.assertIsInstance(newModel, BaseModel)
+        self.assertIsInstance(newModel.updated_at, datetime)
+        self.assertIsInstance(newModel.created_at, datetime)
+        self.assertIs(type(self.meow5.hello), str)
+        self.assertEqual(self.meow5.hello, newModel.hello)
+        self.assertTrue(self.meow5.id == newModel.id)
+        self.assertTrue(self.meow5.created_at == newModel.created_at)
 
     def test_reload(self):
         """ Method to test reload method """
