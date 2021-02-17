@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
-
 import cmd
 from models import storage
 from models.user import User
@@ -12,19 +11,18 @@ from models.review import Review
 
 """ This module creates the console class """
 
-classdict = {'BaseModel': BaseModel,
-             'User': User,
-             'State': State,
-             'City': City,
-             'Amenity': Amenity,
-             'Place': Place,
-             'Review': Review
-             }
-
 
 class HBNBCommand(cmd.Cmd):
     """ This class creates an interactive console """
 
+    classdict = {'BaseModel': BaseModel,
+                 'User': User,
+                 'State': State,
+                 'City': City,
+                 'Amenity': Amenity,
+                 'Place': Place,
+                 'Review': Review
+                 }
     prompt = "(hbnb) "
 
     def emptyline(self):
@@ -43,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
         """ Creates a new instance of BaseModel, saves
         # it (to the JSON file) and prints the id """
         check = 0
-        for key, value in classdict.items():
+        for key, value in self.classdict.items():
             if classname == key:
                 new = value()
                 new.save()
@@ -62,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             inargs = usrinpt.split()
             # inargs = [class, id]
-            if inargs[0] not in classdict.keys():
+            if inargs[0] not in self.classdict.keys():
                 print("** class doesn't exist **")
             elif len(inargs) < 2:
                 print("** instance id missing **")
@@ -113,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in allInsts.items():
                 print(value)
             check = 1
-        if usrinpt in classdict.keys():
+        if usrinpt in self.classdict.keys():
             allInsts = storage.all()
             for key, value in allInsts.items():
                 findClass = key.split(".")
@@ -133,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
         inargs = usrinpt.split(" ", 3)
         if len(inargs) < 1:
             print("** class name missing **")
-        elif inargs[0] not in classdict.keys():
+        elif inargs[0] not in self.classdict.keys():
             print("** class doesn't exist **")
         elif len(inargs) < 2:
             print("** instance id missing **")
@@ -142,8 +140,6 @@ class HBNBCommand(cmd.Cmd):
         elif len(inargs) < 4:
             print("** value missing **")
         else:
-            # find based on id (stored in instid)
-
             allInsts = storage.all()
             check = 0
             collectvalues = []
