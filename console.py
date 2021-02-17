@@ -28,6 +28,30 @@ class HBNBCommand(cmd.Cmd):
         """ Prints every instance of BaseClass """
         self.all = self.do_all("BaseModel")
 
+    def do_User(self, all):
+        """ Prints every instance of User """
+        self.all = self.do_all("User")
+
+    def do_State(self, all):
+        """ Prints every instance of State """
+        self.all = self.do_all("State")
+
+    def do_City(self, all):
+        """ Prints every instance of City """
+        self.all = self.do_all("City")
+
+    def do_Amenity(self, all):
+        """ Prints every instance of Amenity """
+        self.all = self.do_all("Amenity")
+
+    def do_Place(self, all):
+        """ Prints every instance of Place """
+        self.all = self.do_all("Place")
+
+    def do_Review(self, all):
+        """ Prints every instance of Review """
+        self.all = self.do_all("Review")
+
     def emptyline(self):
         """ Skips empty line """
         pass
