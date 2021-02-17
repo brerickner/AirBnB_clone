@@ -70,6 +70,16 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "User {}".format(finalinpt[1])
             self.show = self.do_destroy(info)
+        if splitinput[0] == ".update":
+            updatedinpt = splitinput[1].split(")")
+            nocomma = updatedinpt[0].split(", ")
+            finalinput = []
+            for command in nocomma:
+                finalinput.append(command.split("\""))
+            commands = "User "
+            for val in finalinput:
+                commands += "{} ".format(val[1])
+            self.show = self.do_update(commands)
 
     def do_State(self, usrinpt):
         """ asses all State input to the correct commands """
@@ -86,6 +96,16 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "State {}".format(finalinpt[1])
             self.show = self.do_destroy(info)
+        if splitinput[0] == ".update":
+            updatedinpt = splitinput[1].split(")")
+            nocomma = updatedinpt[0].split(", ")
+            finalinput = []
+            for command in nocomma:
+                finalinput.append(command.split("\""))
+            commands = "State "
+            for val in finalinput:
+                commands += "{} ".format(val[1])
+            self.show = self.do_update(commands)
 
     def do_City(self, usrinpt):
         """ asses all City input to the correct commands """
@@ -102,6 +122,16 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "City {}".format(finalinpt[1])
             self.show = self.do_destroy(info)
+        if splitinput[0] == ".update":
+            updatedinpt = splitinput[1].split(")")
+            nocomma = updatedinpt[0].split(", ")
+            finalinput = []
+            for command in nocomma:
+                finalinput.append(command.split("\""))
+            commands = "City "
+            for val in finalinput:
+                commands += "{} ".format(val[1])
+            self.show = self.do_update(commands)
 
     def do_Amenity(self, usrinpt):
         """ asses all Amenity input to the correct commands """
@@ -118,6 +148,16 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "Amenity {}".format(finalinpt[1])
             self.show = self.do_destroy(info)
+        if splitinput[0] == ".update":
+            updatedinpt = splitinput[1].split(")")
+            nocomma = updatedinpt[0].split(", ")
+            finalinput = []
+            for command in nocomma:
+                finalinput.append(command.split("\""))
+            commands = "Amenity "
+            for val in finalinput:
+                commands += "{} ".format(val[1])
+            self.show = self.do_update(commands)
 
     def do_Place(self, usrinpt):
         """ asses all Place input to the correct commands """
@@ -134,6 +174,16 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "Place {}".format(finalinpt[1])
             self.show = self.do_destroy(info)
+        if splitinput[0] == ".update":
+            updatedinpt = splitinput[1].split(")")
+            nocomma = updatedinpt[0].split(", ")
+            finalinput = []
+            for command in nocomma:
+                finalinput.append(command.split("\""))
+            commands = "Place "
+            for val in finalinput:
+                commands += "{} ".format(val[1])
+            self.show = self.do_update(commands)
 
     def do_Review(self, usrinpt):
         """ asses all Review input to the correct commands """
@@ -150,6 +200,16 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "Review {}".format(finalinpt[1])
             self.show = self.do_destroy(info)
+        if splitinput[0] == ".update":
+            updatedinpt = splitinput[1].split(")")
+            nocomma = updatedinpt[0].split(", ")
+            finalinput = []
+            for command in nocomma:
+                finalinput.append(command.split("\""))
+            commands = "Review "
+            for val in finalinput:
+                commands += "{} ".format(val[1])
+            self.show = self.do_update(commands)
 
     def emptyline(self):
         """ Skips empty line """
