@@ -25,7 +25,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def do_BaseModel(self, usrinpt):
-        """ Prints every instance of BaseClass """
+        """ Passes all BaseModel input to the correct commands """
         # Split by () before checking match
         # See if it matches up to (
         # Pass the rest of the usrinput into the commands
@@ -40,29 +40,71 @@ class HBNBCommand(cmd.Cmd):
             info = "BaseModel {}".format(finalinpt[1])
             self.show = self.do_show(info)
 
-    def do_User(self, all):
-        """ Prints every instance of User """
-        self.all = self.do_all("User")
+    def do_User(self, usrinpt):
+        """ asses all User input to the correct commands """
+        splitinput = usrinpt.split("(")
+        if splitinput[0] == ".all":
+            self.all = self.do_all("User")
+        if splitinput[0] == ".show":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "User {}".format(finalinpt[1])
+            self.show = self.do_show(info)
 
-    def do_State(self, all):
-        """ Prints every instance of State """
-        self.all = self.do_all("State")
+    def do_State(self, usrinpt):
+        """ asses all State input to the correct commands """
+        splitinput = usrinpt.split("(")
+        if splitinput[0] == ".all":
+            self.all = self.do_all("State")
+        if splitinput[0] == ".show":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "State {}".format(finalinpt[1])
+            self.show = self.do_show(info)
 
-    def do_City(self, all):
-        """ Prints every instance of City """
-        self.all = self.do_all("City")
+    def do_City(self, usrinpt):
+        """ asses all City input to the correct commands """
+        splitinput = usrinpt.split("(")
+        if splitinput[0] == ".all":
+            self.all = self.do_all("City")
+        if splitinput[0] == ".show":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "City {}".format(finalinpt[1])
+            self.show = self.do_show(info)
 
-    def do_Amenity(self, all):
-        """ Prints every instance of Amenity """
-        self.all = self.do_all("Amenity")
+    def do_Amenity(self, usrinpt):
+        """ asses all Amenity input to the correct commands """
+        splitinput = usrinpt.split("(")
+        if splitinput[0] == ".all":
+            self.all = self.do_all("Amenity")
+        if splitinput[0] == ".show":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "Amenity {}".format(finalinpt[1])
+            self.show = self.do_show(info)
 
-    def do_Place(self, all):
-        """ Prints every instance of Place """
-        self.all = self.do_all("Place")
+    def do_Place(self, usrinpt):
+        """ asses all Place input to the correct commands """
+        splitinput = usrinpt.split("(")
+        if splitinput[0] == ".all":
+            self.all = self.do_all("Place")
+        if splitinput[0] == ".show":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "Place {}".format(finalinpt[1])
+            self.show = self.do_show(info)
 
-    def do_Review(self, all):
-        """ Prints every instance of Review """
-        self.all = self.do_all("Review")
+    def do_Review(self, usrinpt):
+        """ asses all Review input to the correct commands """
+        splitinput = usrinpt.split("(")
+        if splitinput[0] == ".all":
+            self.all = self.do_all("Review")
+        if splitinput[0] == ".show":
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "Review {}".format(finalinpt[1])
+            self.show = self.do_show(info)
 
     def emptyline(self):
         """ Skips empty line """
