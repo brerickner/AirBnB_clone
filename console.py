@@ -142,6 +142,8 @@ class HBNBCommand(cmd.Cmd):
             allInsts = storage.all()
             check = 0
             collectvalues = []
+            if inargs[2] == "id" or inargs[2] == "created_at" or inargs[2] == "updated_at":
+                return
             for key, value in allInsts.items():
                 if key == "{}.{}".format(inargs[0], inargs[1]):
                     collectvalues.append(value)
@@ -157,15 +159,14 @@ class HBNBCommand(cmd.Cmd):
                                 arg3String = str(inargs[3]).split('\"')
                                 if len(arg3String) > 0:
                                     setattr(value, inargs[2], arg3String[1])
-                                    print(str(value))
                                     # value.inargs[2] = inargs[3]
                                     check = 1
                                     break
                             except:
                                 setattr(value, inargs[2], arg3String[0])
                                 check = 1
-        if check == 0:
-            print("** no instance found **")
+            if check == 0:
+                print("** no instance found **")
 if __name__ == '__main__':
         """ Enters console loop """
         HBNBCommand().cmdloop()
