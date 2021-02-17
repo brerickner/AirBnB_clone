@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-
+""" This init file handles the file storage """
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-
-""" This init file handles the file storage """
 
 storage = FileStorage()
 storage.reload()
