@@ -7,7 +7,7 @@ from models.base_model import BaseModel
 from models.user import User
 
 
-class TestUsergit aClass(unittest.TestCase):
+class TestUserClass(unittest.TestCase):
 
     """ Class that contains unittests for user.py """
 

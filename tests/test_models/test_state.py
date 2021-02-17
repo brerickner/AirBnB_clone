@@ -3,13 +3,13 @@
 
 import unittest
 from datetime import datetime
-from .models.base_model import BaseModel
-from .models.state import State
+from models.base_model import BaseModel
+from models.state import State
 
 
-class TestBaseClass(unittest.TestCase):
+class TestStateClass(unittest.TestCase):
 
-    """ Class that contains unittests for user.py """
+    """ Class that contains unittests for state.py """
 
     def setUp(self):
         """ Method to set up unittests """
