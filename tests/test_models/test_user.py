@@ -3,11 +3,11 @@
 
 import unittest
 from datetime import datetime
-from .models.base_model import BaseModel
-from .models.user import User
+from models.base_model import BaseModel
+from models.user import User
 
 
-class TestBaseClass(unittest.TestCase):
+class TestUsergit aClass(unittest.TestCase):
 
     """ Class that contains unittests for user.py """
 

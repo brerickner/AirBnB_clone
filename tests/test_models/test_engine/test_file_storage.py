@@ -3,22 +3,23 @@
 
 import unittest
 from datetime import datetime
-from models.base_model import BaseModel
-from models import FileStorage
+from .models.base_model import BaseModel
+from .models import FileStorage
 import os
-import models
+from . import models
 
 
-class TestBaseClass(unittest.TestCase):
+class TestFileStorageClass(unittest.TestCase):
 
-    """ Class that contains unittests for base_model.py """
+    """ Class that contains unittests for file_storage.py """
+
     def setUp(self):
         """ Method to set up unittests """
         self.file = 'file.json'
 
         if os.path.isfile(self.file):
             os.remove(self.file)
-        
+
         self.meow1 = BaseModel()
         self.meow2 = BaseModel(name="Bre", number="2326")
         self.meow3 = BaseModel(name="Aleia")
@@ -26,7 +27,7 @@ class TestBaseClass(unittest.TestCase):
         self.meow5 = BaseModel()
         self.storeMeow = FileStorage()
         self.allMeows = models.storage.all()
-    
+
     def test_private(self):
         """Method to test if file storage attributes are private"""
         with self.assertRaises(AttributeError):
@@ -54,13 +55,13 @@ class TestBaseClass(unittest.TestCase):
 
         self.assertTrue(hasattr(FileStorage, "_FileStorage__file_path"))
         self.assertTrue(hasattr(FileStorage, "_FileStorage__objects"))
-        
+
     def test_new_inst_attr(self):
         """ Method to test if instance of file storage inherits attr """
         self.storeMeow = FileStorage()
         self.assertTrue(hasattr(self.storeMeow, "_FileStorage__objects"))
         self.assertTrue(hasattr(self.storeMeow, "_FileStorage__file_path"))
-    
+
     def test_has_attr(self):
         """ Method to test File Storage dict attrs """
         meowski = FileStorage()
