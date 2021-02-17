@@ -24,9 +24,21 @@ class HBNBCommand(cmd.Cmd):
                  }
     prompt = "(hbnb) "
 
-    def do_BaseModel(self, all):
+    def do_BaseModel(self, usrinpt):
         """ Prints every instance of BaseClass """
-        self.all = self.do_all("BaseModel")
+        # Split by () before checking match
+        # See if it matches up to (
+        # Pass the rest of the usrinput into the commands
+        # Split input should be [command, inputforcommand]
+        splitinput = usrinpt.split("(")
+        if splitinput[0] == ".all":
+            self.all = self.do_all("BaseModel")
+        if splitinput[0] == ".show":
+            # Would this be easier if we used kwargs instead of splitting?
+            updatedinpt = splitinput[1].split(")")
+            finalinpt = updatedinpt[0].split("\"")
+            info = "BaseModel {}".format(finalinpt[1])
+            self.show = self.do_show(info)
 
     def do_User(self, all):
         """ Prints every instance of User """
