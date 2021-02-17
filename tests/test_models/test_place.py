@@ -3,8 +3,8 @@
 
 import unittest
 from datetime import datetime
-from .models.base_model import BaseModel
-from .models.place import Place
+from models.base_model import BaseModel
+from models.place import Place
 
 
 class TestPlaceClass(unittest.TestCase):
