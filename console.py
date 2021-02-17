@@ -44,6 +44,16 @@ class HBNBCommand(cmd.Cmd):
             finalinpt = updatedinpt[0].split("\"")
             info = "BaseModel {}".format(finalinpt[1])
             self.show = self.do_destroy(info)
+        if splitinput[0] == ".update":
+            updatedinpt = splitinput[1].split(")")
+            nocomma = updatedinpt[0].split(", ")
+            finalinput = []
+            for command in nocomma:
+                finalinput.append(command.split("\""))
+            commands = "BaseModel "
+            for val in finalinput:
+                commands += "{} ".format(val[1])
+            self.show = self.do_update(commands)
 
     def do_User(self, usrinpt):
         """ asses all User input to the correct commands """
@@ -59,7 +69,6 @@ class HBNBCommand(cmd.Cmd):
             updatedinpt = splitinput[1].split(")")
             finalinpt = updatedinpt[0].split("\"")
             info = "User {}".format(finalinpt[1])
-            print(info)
             self.show = self.do_destroy(info)
 
     def do_State(self, usrinpt):
