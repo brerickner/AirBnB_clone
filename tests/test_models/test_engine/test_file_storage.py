@@ -3,10 +3,10 @@
 
 import unittest
 from datetime import datetime
-from .models.base_model import BaseModel
-from .models import FileStorage
+from models.base_model import BaseModel
+from models import FileStorage
 import os
-from . import models
+import models
 
 
 class TestFileStorageClass(unittest.TestCase):
