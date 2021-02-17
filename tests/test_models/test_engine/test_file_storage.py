@@ -75,3 +75,9 @@ class TestFileStorageClass(unittest.TestCase):
         """ Method to test type of priv attr """
         self.assertIs(type(models.storage._FileStorage__objects), dict)
         self.assertIs(type(models.storage._FileStorage__file_path), str)
+
+    def test_all_method(self):
+        """ Method to test all gets objects from file_storage """
+
+        checkStorage = FileStorage._FileStorage__objects
+        self.assertDictEqual(self.allMeows, checkStorage)
