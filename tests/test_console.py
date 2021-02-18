@@ -173,7 +173,8 @@ class TestConsoleClass(unittest.TestCase):
 
         if os.path.exists("file.json"):
             os.remove("file.json")
-
+        """
         with patch('sys.stdout', new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("all"))
             self.assertIs(list, type(f.getvalue()))
+        """
