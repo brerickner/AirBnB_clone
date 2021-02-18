@@ -282,7 +282,7 @@ class HBNBCommand(cmd.Cmd):
                 for key in allInsts:
                     if key == "{}.{}".format(inargs[0], inargs[1]):
                         del allInsts[key]
-                        storage.save
+                        storage.save()
                         check = 1
                         break
                 if check == 0:
