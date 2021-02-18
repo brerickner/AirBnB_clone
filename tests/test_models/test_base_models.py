@@ -115,7 +115,7 @@ class TestBaseClass(unittest.TestCase):
 
     def test_base_save(self):
         """ Method to test if updated after save """
-
+        
         uptime1 = self.meow1.updated_at
         uptime2 = self.meow2.updated_at
         uptime3 = self.meow3.updated_at
@@ -200,11 +200,11 @@ class TestBaseClass(unittest.TestCase):
         meow4_dict = self.meow4.to_dict()
         meow5_dict = self.meow5.to_dict()
 
-        self.assertTrue(hasattr(self.meow1, "__class__"))
-        self.assertTrue(hasattr(self.meow2, "__class__"))
-        self.assertTrue(hasattr(self.meow3, "__class__"))
-        self.assertTrue(hasattr(self.meow4, "__class__"))
-        self.assertTrue(hasattr(self.meow5, "__class__"))
+        self.assertTrue(hasattr(meow1_dict, "__class__"))
+        self.assertTrue(hasattr(meow2_dict, "__class__"))
+        self.assertTrue(hasattr(meow3_dict, "__class__"))
+        self.assertTrue(hasattr(meow4_dict, "__class__"))
+        self.assertTrue(hasattr(meow5_dict, "__class__"))
 
     def test_json_key_type(self):
         """ Method to test if json keys are all strings """
@@ -216,11 +216,11 @@ class TestBaseClass(unittest.TestCase):
         meow5_json = self.meow5.to_dict()
 
         for key in meow1_json.keys():
-            self.assertEquals(type(meow1_json[key]), str)
-            self.assertEquals(type(meow2_json[key]), str)
-            self.assertEquals(type(meow3_json[key]), str)
-            self.assertEquals(type(meow4_json[key]), str)
-            self.assertEquals(type(meow5_json[key]), str)
+            self.assertEqual(type(meow1_json[key]), str)
+            self.assertEqual(type(meow2_json[key]), str)
+            self.assertEqual(type(meow3_json[key]), str)
+            self.assertEqual(type(meow4_json[key]), str)
+            self.assertEqual(type(meow5_json[key]), str)
 
     def test_str_repr(self):
         """ Method to test is str repr is correct """
