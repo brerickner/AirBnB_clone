@@ -33,6 +33,14 @@ class HBNBCommand(cmd.Cmd):
         splitinput = usrinpt.split("(")
         if splitinput[0] == ".all":
             self.all = self.do_all("BaseModel")
+        if splitinput[0] == ".count":
+            allInsts = storage.all()
+            num = 0
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if findClass[0] == "BaseModel":
+                    num += 1
+            print(num)
         if splitinput[0] == ".show":
             # Would this be easier if we used kwargs instead of splitting?
             updatedinpt = splitinput[1].split(")")
