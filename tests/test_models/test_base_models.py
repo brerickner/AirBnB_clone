@@ -115,7 +115,7 @@ class TestBaseClass(unittest.TestCase):
 
     def test_base_save(self):
         """ Method to test if updated after save """
-        
+
         uptime1 = self.meow1.updated_at
         uptime2 = self.meow2.updated_at
         uptime3 = self.meow3.updated_at
