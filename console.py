@@ -68,6 +68,14 @@ class HBNBCommand(cmd.Cmd):
         splitinput = usrinpt.split("(")
         if splitinput[0] == ".all":
             self.all = self.do_all("User")
+        if splitinput[0] == ".count":
+            allInsts = storage.all()
+            num = 0
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if findClass[0] == "User":
+                    num += 1
+            print(num)
         if splitinput[0] == ".show":
             updatedinpt = splitinput[1].split(")")
             finalinpt = updatedinpt[0].split("\"")
@@ -94,6 +102,14 @@ class HBNBCommand(cmd.Cmd):
         splitinput = usrinpt.split("(")
         if splitinput[0] == ".all":
             self.all = self.do_all("State")
+        if splitinput[0] == ".count":
+            allInsts = storage.all()
+            num = 0
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if findClass[0] == "State":
+                    num += 1
+            print(num)
         if splitinput[0] == ".show":
             updatedinpt = splitinput[1].split(")")
             finalinpt = updatedinpt[0].split("\"")
@@ -120,6 +136,14 @@ class HBNBCommand(cmd.Cmd):
         splitinput = usrinpt.split("(")
         if splitinput[0] == ".all":
             self.all = self.do_all("City")
+        if splitinput[0] == ".count":
+            allInsts = storage.all()
+            num = 0
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if findClass[0] == "City":
+                    num += 1
+            print(num)
         if splitinput[0] == ".show":
             updatedinpt = splitinput[1].split(")")
             finalinpt = updatedinpt[0].split("\"")
@@ -146,6 +170,14 @@ class HBNBCommand(cmd.Cmd):
         splitinput = usrinpt.split("(")
         if splitinput[0] == ".all":
             self.all = self.do_all("Amenity")
+        if splitinput[0] == ".count":
+            allInsts = storage.all()
+            num = 0
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if findClass[0] == "Amenity":
+                    num += 1
+            print(num)
         if splitinput[0] == ".show":
             updatedinpt = splitinput[1].split(")")
             finalinpt = updatedinpt[0].split("\"")
@@ -172,6 +204,14 @@ class HBNBCommand(cmd.Cmd):
         splitinput = usrinpt.split("(")
         if splitinput[0] == ".all":
             self.all = self.do_all("Place")
+        if splitinput[0] == ".count":
+            allInsts = storage.all()
+            num = 0
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if findClass[0] == "Place":
+                    num += 1
+            print(num)
         if splitinput[0] == ".show":
             updatedinpt = splitinput[1].split(")")
             finalinpt = updatedinpt[0].split("\"")
@@ -198,6 +238,14 @@ class HBNBCommand(cmd.Cmd):
         splitinput = usrinpt.split("(")
         if splitinput[0] == ".all":
             self.all = self.do_all("Review")
+        if splitinput[0] == ".count":
+            allInsts = storage.all()
+            num = 0
+            for key, value in allInsts.items():
+                findClass = key.split(".")
+                if findClass[0] == "Review":
+                    num += 1
+            print(num)
         if splitinput[0] == ".show":
             updatedinpt = splitinput[1].split(")")
             finalinpt = updatedinpt[0].split("\"")
