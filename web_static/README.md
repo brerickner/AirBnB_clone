@@ -2,7 +2,8 @@
 
 ### Introduction:
 This project is when we start building the front end of our AirBnb clone. It'll involve the manipulation of HTML and CSS languages and the first steps begin with "designing" "sketching" and "prototyping" each element:
-** Create simple HTML static pages
+
+**Create simple HTML static pages
 ** Style guide
 ** Fake contents
 ** No Javascript
