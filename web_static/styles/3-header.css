@@ -5,7 +5,6 @@ header {
     border-bottom: 1px #CCCCCC solid;
 }
 .logo {
-    z-index: 1;
     background-image: url("/AirBnB_clone/web_static/images/logo.png");
     height: 60px;
     width: 142px;
