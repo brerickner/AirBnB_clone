@@ -83,9 +83,6 @@
     flex-direction: column-reverse;
     text-align: center;
 }
-.description {
-    
-}
 .description p {
     text-align: start;
     position: relative;
