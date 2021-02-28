@@ -28,7 +28,7 @@ button:hover {
     float: left;
     margin-left: 5%;
 }
-.amenities {
+.filters .amenities {
     height: 100%;
     width: 25%;
     margin-right: 17%;
