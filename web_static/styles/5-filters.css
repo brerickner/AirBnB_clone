@@ -4,6 +4,7 @@ section.filters {
     width: 100%;
     border: 1px #DDDDDD solid;
     border-radius: 4px;
+    position: relative;
 }
 section.filters button {
     font-size: 18px;
@@ -17,6 +18,7 @@ section.filters button {
     margin-top: 11px;
     margin-right: 30px;
     float: right;
+    position: relative;
 }
 section.filters button:hover {
     opacity: 90%;
@@ -27,20 +29,24 @@ section.filters button:hover {
     border-right: 1px #DDDDDD solid;
     float: left;
     margin-left: 5%;
+    position: relative;
 }
 .amenities {
     height: 100%;
     width: 25%;
     margin-right: 17%;
     float: right;
+    position: relative;
 }
 h3 {
     font-weight: 600;
     margin-bottom: 5px;
+    position: relative;
 }
 h4 {
     font-weight: 400;
     font-size: 14px;
     margin-top: 5px;
+    position: relative;
 }
 
