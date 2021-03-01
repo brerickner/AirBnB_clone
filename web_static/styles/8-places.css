@@ -1,3 +1,7 @@
+body .footer {
+     /*needed for more content being added */
+     margin-bottom: -50px;
+}
 .flex_container {
     display: flex;
     flex-direction: row;
