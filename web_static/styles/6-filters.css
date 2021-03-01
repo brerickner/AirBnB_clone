@@ -49,19 +49,23 @@ h4 {
     border-radius: 4px;
     display: none;
     position: absolute;
-    width: 17.88%;
-    margin-left: -50px;
     list-style-type: none;
 }
 .locations:hover .popover {
+    margin-left: -50px;
+    margin-right: -50px;
     display: block;
+    width: 35ch;
     margin-top: -4px;
     padding-top: 20px;
     padding-bottom: 45px;
     padding-left: 28px;
 }
 .amenities:hover .popover {
+    margin-left: -50px;
+    margin-right: -50px;
     display: block;
+    width: 35ch;
     margin-top: -4px;
     padding-top: 30px;
     padding-bottom: 30px;
