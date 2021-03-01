@@ -38,10 +38,13 @@ button:hover {
     margin-right: 17%;
     float: right;
 }
+/* INCREASE FONT SIZE FOR ACCESSIBILITY*/
 h3 {
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 5px;
 }
+/* INCREASE FONT SIZE FOR ACCESSIBILITY*/
 h4 {
     font-weight: 400;
     font-size: 16px;
@@ -80,6 +83,7 @@ h4 {
     font-size: 20px;
     margin-bottom: 5px;
 }
+/* INCREASE FONT SIZE FOR ACCESSIBILITY*/
 .popover ul li {
     list-style-type: none;
     padding-top: 2px;
@@ -87,6 +91,7 @@ h4 {
     margin-left: -30px;
     font-size: 16px;
 }
+/* INCREASE FONT SIZE FOR ACCESSIBILITY*/
 .amenities li {
     list-style-type: none;
     padding-top: 6px;
